@@ -7,6 +7,7 @@ import fs from 'fs'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
+//import cors from 'cors'
 import colors from 'colors'
 
 
@@ -17,18 +18,21 @@ dotenv.config()
 
 connectDB()
 
+
 const app = express()
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use('/',( req, res, next) => {
-    res.send('hello from ssl server');
-}) 
+// app.use('/',( req, res, next) => {
+//     res.send('hello from ssl server');
+// }) 
 
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
+
+//app.use(cors())
 app.use(express.json())
 
 //calling Routes

@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
     userLoginReducer,
     userRegisterReducer,
-} from './reducers/userReducer'
+} from './reducers/userReducers.js'
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,

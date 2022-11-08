@@ -1,4 +1,12 @@
-import React from 'react'
+
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Form, Button, Row, Col } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
+import { login } from '../actions/userActions'
 
 const LoginScreen = ({ location, history }) => {
     const [email, setEmail] = useState('')
@@ -10,10 +18,10 @@ const LoginScreen = ({ location, history }) => {
 
     useEffect(() => {
         if (userInfo) {
-              history.push(redirect)
+              //history.push('/')
         }
 
-  }, [history, userInfo, redirect])
+  }, [history, userInfo])
  
   const submitHandler = (e) => {
         e.preventDefault()
@@ -44,15 +52,15 @@ const LoginScreen = ({ location, history }) => {
 
                   </Form>
 
-                  <Row className='py-2'>
+                  {/* <Row className='py-2'>
                         <Col>
                               New Customer ? {' '}
-                              <Link to={redirect ? `/register?redirect=${redirect}` : '/register'} >
+                              <Link to={ `/register?redirect=${redirect}` : '/register'} >
                                     Register
                               </Link>
                         </Col>
 
-                  </Row>
+                  </Row> */}
             </FormContainer>
     )
 }
