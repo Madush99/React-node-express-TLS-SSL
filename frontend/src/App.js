@@ -7,6 +7,8 @@ import SignupScreen from './screens/SignupScreen/signupScreen';
 import AdminScreen from './screens/adminScreen';
 import { Container } from 'react-bootstrap';
 import NavBar from './components/NavBar';
+import ManagerScreen from './screens/managerMsgScreen';
+import MessageScreen from './screens/MessageScreen/messageScreen';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/" element={<HomeScreen />} />
         <Route path="/signup" element={<SignupScreen />} />
         <Route path="/admin" element={<AdminScreen />} />
+        <Route path="/manager" element={<ManagerScreen />} />
+        <Route path="/message" element={<MessageScreen />} />
 
       </Routes>
       {/* </Container> */}

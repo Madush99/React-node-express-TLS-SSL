@@ -13,6 +13,9 @@ import colors from 'colors'
 
 //routes
 import userRoutes from './routes/userRoutes.js'
+import mesgRoutes from './routes/messageRoutes.js'
+import fileRoutes from './routes/fileRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 
 dotenv.config()
 
@@ -28,6 +31,7 @@ const __dirname = dirname(__filename);
 //     res.send('hello from ssl server');
 // }) 
 
+
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
@@ -36,9 +40,12 @@ if(process.env.NODE_ENV === 'development') {
 app.use(express.json())
 
 //calling Routes
-
+const __dirname1 = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname1, '/uploads')))
+app.use('/api/uploads', uploadRoutes)
 app.use('/api/users', userRoutes);
-
+app.use('/api/msg', mesgRoutes);
+app.use('/api/uploadfile', fileRoutes);
 
 
 const sslServer = https.createServer({

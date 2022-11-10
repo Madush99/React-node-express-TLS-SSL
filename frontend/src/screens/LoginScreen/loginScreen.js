@@ -9,6 +9,7 @@ import FormContainer from '../../components/FormContainer'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../actions/userActions'
 import './login.css'
+import bcrypt from "bcryptjs"
 
 const LoginScreen = ({ location, history }) => {
     const [email, setEmail] = useState('')
@@ -18,16 +19,23 @@ const LoginScreen = ({ location, history }) => {
     const userLogin = useSelector(state => state.userLogin)
     const { loading, error, userInfo } = userLogin
     const navigate = useNavigate();
+
     
+
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
             navigate("/admin");
         }
         if (userInfo && !userInfo.isAdmin) {
-            navigate("/");
-        }
-        
+            if(userInfo.role === 'manager'){
+                  navigate("/manager");
+            }else if(userInfo.role === 'user'){
+                  navigate("/")
+            }
+           
 
+        }
+      
   }, [ userInfo])
  
   const submitHandler = (e) => {
@@ -35,7 +43,7 @@ const LoginScreen = ({ location, history }) => {
         dispatch(login(email, password))
         
   }
-
+ 
   const redirect = () => {
       if (userInfo.isAdmin === true) {
             

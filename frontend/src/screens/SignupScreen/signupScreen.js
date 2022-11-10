@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { register } from '../../actions/userActions.js'
 import Message from '../../components/Message.js'
 import Loader from '../../components/Loader.js'
+import bcrypt from 'bcryptjs'
 
 const SignupScreen = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [role, setRole] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
 
@@ -21,15 +23,17 @@ const SignupScreen = () => {
     const userRegister = useSelector(state => state.userLogin)
     const { loading, error, userInfo } = userRegister
 
-   // const redirect = location.search ? location.search.split('=')[1] : '/'
+    // const redirect = location.search ? location.search.split('=')[1] : '/'
+
+    const hashPassword = bcrypt.hashSync(password, 10);
 
     useEffect(() => {
         if (userInfo) {
-          //navigate("/admin");
+            //navigate("/admin");
             // return <Navigate to ="/admin" replace={true}/>
         }
 
-    }, [ userInfo, navigate ])
+    }, [userInfo, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -37,7 +41,7 @@ const SignupScreen = () => {
             setMessage('Password do not match')
         }
         else {
-            dispatch(register(name, email, password))
+            dispatch(register(name, email, password, role))
         }
     }
 
@@ -80,6 +84,13 @@ const SignupScreen = () => {
                                                     <input id="inputEmail" type="email" placeholder="Enter Email" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
                                                         value={email}
                                                         onChange={(e) => setEmail(e.target.value)} />
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <select placeholder='Select User Role' id='role' required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" value={role} onChange={(e) => setRole(e.target.value)}>
+                                                        <option value="manager">Manager</option>
+                                                        <option value="user">User</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group mb-3">
 

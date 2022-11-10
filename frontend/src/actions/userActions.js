@@ -1,5 +1,9 @@
 import axios from 'axios'
 import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from '../constants/userConstants'
+import bcrypt from 'bcryptjs'
+
+
+
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -12,7 +16,6 @@ export const login = (email, password) => async (dispatch) => {
                       'Content-Type': 'application/json',
                 },
           }
-
           const { data } = await axios.post('/api/users/login', { email, password }, config)
 
           dispatch({
@@ -36,7 +39,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
-export const register = (name, email, password, isAdmin) => async (dispatch) => {
+export const register = (name, email, password,  role) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -47,8 +50,8 @@ export const register = (name, email, password, isAdmin) => async (dispatch) => 
                 'Content-Type': 'application/json'
             }
         }
-
-        const { data } = await axios.post('/api/users/reg', { name, email, password, isAdmin },
+        const hashPassword = bcrypt.hashSync(password, 10);
+        const { data } = await axios.post('/api/users/reg', { name, email, hashPassword,  role },
             config
         )
 

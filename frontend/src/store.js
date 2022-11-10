@@ -6,10 +6,12 @@ import {
     userLoginReducer,
     userRegisterReducer,
 } from './reducers/userReducers.js'
+import { messageCreateReducer } from './reducers/messageReducers.js'
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
+    messageCreate: messageCreateReducer
 })
 
 
