@@ -25,7 +25,7 @@ const SignupScreen = () => {
 
     // const redirect = location.search ? location.search.split('=')[1] : '/'
 
-    const hashPassword = bcrypt.hashSync(password, 10);
+    //const hashPassword = bcrypt.hashSync(password, 10);
 
     useEffect(() => {
         if (userInfo) {

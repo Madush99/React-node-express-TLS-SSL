@@ -30,7 +30,7 @@ const LoginScreen = ({ location, history }) => {
             if(userInfo.role === 'manager'){
                   navigate("/manager");
             }else if(userInfo.role === 'user'){
-                  navigate("/")
+                  navigate("/user")
             }
            
 

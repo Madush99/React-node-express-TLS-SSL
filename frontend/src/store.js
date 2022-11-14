@@ -7,11 +7,13 @@ import {
     userRegisterReducer,
 } from './reducers/userReducers.js'
 import { messageCreateReducer } from './reducers/messageReducers.js'
+import { fileUploadReducer } from './reducers/fileUploadReducers.js'
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
-    messageCreate: messageCreateReducer
+    messageCreate: messageCreateReducer,
+    fileUpload: fileUploadReducer
 })
 
 

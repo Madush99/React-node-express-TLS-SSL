@@ -51,7 +51,7 @@ export const register = (name, email, password,  role) => async (dispatch) => {
             }
         }
         const hashPassword = bcrypt.hashSync(password, 10);
-        const { data } = await axios.post('/api/users/reg', { name, email, hashPassword,  role },
+        const { data } = await axios.post('/api/users/reg', { name, email, password,  role },
             config
         )
 
