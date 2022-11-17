@@ -85,8 +85,7 @@ const LoginScreen = ({ location, history }) => {
                                                                   <label for="customCheck1" class="custom-control-label">Remember password</label>
                                                             </div>
                                                             <button type="submit" class="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
-                                                            <div class="text-center d-flex justify-content-between mt-4"><p>New Customer? <a href="/signup" class="font-italic text-muted">
-                                                                  <u>Register Now</u></a></p></div>
+                                                
                                                       </form>
                                                 </div>
                                           </div>

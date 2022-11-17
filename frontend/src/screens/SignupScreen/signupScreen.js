@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { register } from '../../actions/userActions.js'
 import Message from '../../components/Message.js'
 import Loader from '../../components/Loader.js'
+import { logout } from '../../actions/userActions'
 import bcrypt from 'bcryptjs'
 
 const SignupScreen = () => {
@@ -27,13 +28,13 @@ const SignupScreen = () => {
 
     //const hashPassword = bcrypt.hashSync(password, 10);
 
-    useEffect(() => {
-        if (userInfo) {
-            //navigate("/admin");
-            // return <Navigate to ="/admin" replace={true}/>
-        }
+    // useEffect(() => {
+    //     if (userInfo) {
+    //        ;
+    //         // return <Navigate to ="/admin" replace={true}/>
+    //     }
 
-    }, [userInfo, navigate])
+    // }, [userInfo])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -42,89 +43,76 @@ const SignupScreen = () => {
         }
         else {
             dispatch(register(name, email, password, role))
+            logoutHandler()
         }
     }
-
+    const logoutHandler = () => {
+        dispatch(logout())
+  }
     return (
         <>
+            {userInfo && userInfo.isAdmin ? (
 
-            <div className="maincontainer">
-                <div class="container-fluid">
-                    <div class="row no-gutter">
+                <div className="maincontainer">
+                    <div class="container-fluid">
+                        <div class="row no-gutter">
 
+                            <div class="col-md-6 d-none d-md-flex bg-image1"></div>
 
-                        <div class="col-md-6 d-none d-md-flex bg-image1"></div>
+                            <div class="col-md-6 bg-light">
+                                <div class="signup d-flex align-items-center py-5">
 
-                        <div class="col-md-6 bg-light">
-                            <div class="signup d-flex align-items-center py-5">
-
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-10 col-xl-7 mx-auto">
-                                            <div className='nm'>
-                                                {error && <Message variant='danger'>{message}</Message>}
-                                                {error && <Message variant='danger'>{error}</Message>}
-                                                {loading && <Loader />}
-                                            </div>
-                                            <center>
-
-                                                <h3 class="display-4">SIGN UP</h3>
-                                            </center>
-                                            <br />
-
-                                            <form onSubmit={submitHandler}>
-                                                <div class="form-group mb-3">
-
-                                                    < input id="Enter Name" type="text" placeholder="Enter Name" required="" autofocus="" className="form-control rounded-pill border-0 shadow-sm px-4"
-                                                        value={name}
-                                                        onChange={(e) => setName(e.target.value)} />
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-10 col-xl-7 mx-auto">
+                                                <div className='nm'>
+                                                    {error && <Message variant='danger'>{message}</Message>}
+                                                    {error && <Message variant='danger'>{error}</Message>}
+                                                    {loading && <Loader />}
                                                 </div>
-                                                <div class="form-group mb-3">
+                                                <center>
 
-                                                    <input id="inputEmail" type="email" placeholder="Enter Email" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
-                                                        value={email}
-                                                        onChange={(e) => setEmail(e.target.value)} />
-                                                </div>
-
-                                                <div class="form-group mb-3">
-                                                    <select placeholder='Select User Role' id='role' required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" value={role} onChange={(e) => setRole(e.target.value)}>
-                                                        <option value="manager">Manager</option>
-                                                        <option value="user">User</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group mb-3">
-
-                                                    <input id="inputPassword" type="password" placeholder="Enter Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
-                                                        value={password}
-                                                        onChange={(e) => setPassword(e.target.value)} />
-                                                </div>
-                                                <div class="form-group mb-3">
-
-                                                    <input id="inputPassword" type="password" placeholder="Confirm Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
-                                                        value={confirmPassword}
-                                                        onChange={(e) => setConfirmPassword(e.target.value)} />
-                                                </div>
+                                                    <h3 class="display-4">ADD USER</h3>
+                                                </center>
                                                 <br />
-                                                <button type="submit" class="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign up</button>
 
+                                                <form onSubmit={submitHandler}>
+                                                    <div class="form-group mb-3">
 
-                                                <center><p class="text-muted mb-4">Create an Account using Social Links.</p></center>
+                                                        < input id="Enter Name" type="text" placeholder="Enter Name" required="" autofocus="" className="form-control rounded-pill border-0 shadow-sm px-4"
+                                                            value={name}
+                                                            onChange={(e) => setName(e.target.value)} />
+                                                    </div>
+                                                    <div class="form-group mb-3">
 
-                                                <div class="social-media">
-                                                    <a href="https://twitter.com/" class="social-icon">
-                                                        <i class="fab fa-twitter"></i>
-                                                    </a>
-                                                    <a href="https://accounts.google.com/signup/v2/webcreateaccount?hl=en&flowName=GlifWebSignIn&flowEntry=SignUp" class="social-icon">
-                                                        <i class="fab fa-google"></i>
-                                                    </a>
-                                                    <a href="https://www.facebook.com/" class="social-icon">
-                                                        <i class="fab fa-facebook"></i>
-                                                    </a>
-                                                    <a href="https://www.linkedin.com/home" class="social-icon">
-                                                        <i class="fab fa-linkedin-in"></i>
-                                                    </a>
-                                                </div>
-                                            </form>
+                                                        <input id="inputEmail" type="email" placeholder="Enter Email" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                                                            value={email}
+                                                            onChange={(e) => setEmail(e.target.value)} />
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        <select placeholder='Select User Role' id='role' required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" value={role} onChange={(e) => setRole(e.target.value)}>
+                                                            <option value="manager">Manager</option>
+                                                            <option value="user">User</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mb-3">
+
+                                                        <input id="inputPassword" type="password" placeholder="Enter Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                                                            value={password}
+                                                            onChange={(e) => setPassword(e.target.value)} />
+                                                    </div>
+                                                    <div class="form-group mb-3">
+
+                                                        <input id="inputPassword" type="password" placeholder="Confirm Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+                                                            value={confirmPassword}
+                                                            onChange={(e) => setConfirmPassword(e.target.value)} />
+                                                    </div>
+                                                    <br />
+                                                    <button type="submit" class="btn btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm">ADD USER</button>
+
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +120,8 @@ const SignupScreen = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            ) : (<Message variant='danger'>Not Authorized</Message>)}
+
         </>
     )
 }

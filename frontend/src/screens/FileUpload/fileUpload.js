@@ -19,6 +19,9 @@ const FileUpload = () => {
   const {loading, error } = fileUpload
 
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
     const formData = new FormData()
@@ -49,38 +52,42 @@ const FileUpload = () => {
 
   return (
     <>
-    <FormContainer>
-    <h1>Upload File</h1>
-    {loading ? (
-          <Loader />
-    ) : error ? (
-          <Message variant='danger'>{error}</Message>
-    ) : (
-          <Form onSubmit={submitHandler}>
-                <Form.Group controlId='image'>
-                      <Form.Label>File</Form.Label>
-                      <Form.Control
-                            type='text'
-                            placeholder='Enter Image url'
-                            value={file}
-                            onChange={(e) => setFile(e.target.value)}
-                      ></Form.Control>
-                      {/* <Form.File
-                           // id='image-file'
-                            label='Choose File'
-                            custom
-                            onChange={uploadFileHandler}
-                      ></Form.File> */}
-                      <input type="file" onChange={uploadFileHandler}/>
-                      {uploading && <Loader />}
-                </Form.Group>
-
-                <Button type='submit' variant='primary'>
-                      Update
-                </Button>
-          </Form>
-    )}
-</FormContainer>
+    {userInfo && userInfo.role === 'manager' ? (
+        <FormContainer>
+        <h1>Upload File</h1>
+        {loading ? (
+              <Loader />
+        ) : error ? (
+              <Message variant='danger'>{error}</Message>
+        ) : (
+              <Form onSubmit={submitHandler}>
+                    <Form.Group controlId='image'>
+                          <Form.Label>File</Form.Label>
+                          <Form.Control
+                                type='text'
+                                placeholder='Enter Image url'
+                                value={file}
+                                onChange={(e) => setFile(e.target.value)}
+                          ></Form.Control>
+                          {/* <Form.File
+                               // id='image-file'
+                                label='Choose File'
+                                custom
+                                onChange={uploadFileHandler}
+                          ></Form.File> */}
+                          <input type="file" onChange={uploadFileHandler}/>
+                          {uploading && <Loader />}
+                    </Form.Group>
+    <br>
+    </br>
+                    <Button type='submit' variant='primary'>
+                          Upload File
+                    </Button>
+              </Form>
+        )}
+    </FormContainer>
+    ): <Message variant='danger'>Not authorized</Message>}
+  
 </>
   )
 }

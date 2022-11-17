@@ -23,8 +23,19 @@ const ManagerScreen = () => {
     <>
     {userInfo && userInfo.role === 'manager' ? (
       <>
-   <Button onClick={redirect}> Message</Button>
-   <Button onClick={redirect1}> File Upload</Button>
+
+      
+      <center>
+        <br></br>
+      <h1> Manger Home</h1>
+        <br></br>
+        <br></br>
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG8vgTGhD1tKW3WMnkYs19oGEnIKaEE6g99g&usqp=CAU' width={100} height={100}  alt="Add file" onClick={redirect1}/>
+      <br></br>
+      <br></br>
+      <img src='https://icons.veryicon.com/png/o/business/blue-business-icon/send-message-4.png' width={100} height={100}  alt="Add file" onClick={redirect}/>
+      </center>
+   
    </>
     ): (
       <Message variant='danger'>Not Authorized</Message>

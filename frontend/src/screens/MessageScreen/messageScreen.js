@@ -48,8 +48,9 @@ const MessageScreen = () => {
                         ></Form.Control>
                   </Form.Group>
   
+  <br></br>
                   <Button type='submit' variant='primary'>
-                        Update
+                        Send Message
                   </Button>
 
             </Form>
