@@ -54,3 +54,5 @@ const sslServer = https.createServer({
 }, app);
 
 sslServer.listen(4000, () => console.log('Secure server 🚀 🔑 on port 4000'.yellow.bold))
+
+export default app;

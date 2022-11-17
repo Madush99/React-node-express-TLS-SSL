@@ -3,7 +3,12 @@ import mongoose from 'mongoose'
 const connectDB = async () =>{
     //database connection
     try{
-        const conn = await mongoose.connect(process.env.MONGO_URI, {
+        let database = process.env.MONGO_URI;
+        if (process.env.NODE_ENV === "testing") {
+            database = process.env.MONGO_URI;
+          }
+          
+        const conn = await mongoose.connect(database, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
            // useCreateIndex: true

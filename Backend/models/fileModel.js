@@ -10,7 +10,17 @@ const fileSchema = mongoose.Schema({
     file: {
         type: String,
         required: true
-    }
+    },
+    fileSecurityKey : {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    fileInitVector : {
+        type: String,
+        required: true, 
+        trim: true,
+      },
 },{
     timestamps: true
 })

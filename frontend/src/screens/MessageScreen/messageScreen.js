@@ -6,7 +6,6 @@ import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import { createMessage } from '../../actions/messageActions.js'
-import bcrypt from "bcryptjs"
 
 const MessageScreen = () => {
 
@@ -20,22 +19,9 @@ const MessageScreen = () => {
   const messageCreate = useSelector((state) => state.messageCreate)
   const {loading, error} = messageCreate
 
-const hashMessage = bcrypt.hashSync(message, 10);
-
-bcrypt.compare(message, hashMessage, function(err, isMatch){
-      if(err){
-            throw err;
-      }else if(!isMatch){
-            console.log("Message  dost not Match")
-      }else{
-            console.log("Message match")
-      }
-})
-
-console.log(hashMessage)
   const submitHandler = (e) => {
       e.preventDefault();
-      dispatch(createMessage(hashMessage))
+      dispatch(createMessage(message))
 }
 
   return (

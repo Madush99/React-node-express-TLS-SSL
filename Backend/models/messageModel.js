@@ -10,7 +10,17 @@ const messageSchema = mongoose.Schema({
     message: {
         type: String,
         required: true
-    }
+    },
+    messageSecurityKey : {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    messageInitVector : {
+        type: String,
+        required: true, 
+        trim: true,
+      },
 },{
     timestamps: true
 })
@@ -19,14 +29,14 @@ const messageSchema = mongoose.Schema({
 //     return await bcrypt.compare(enterMessage, this.message)
 // }
 
-messageSchema.pre('save', async function(next){
-    if(!this.isModified('message')){
-        next()
-    }
+// messageSchema.pre('save', async function(next){
+//     if(!this.isModified('message')){
+//         next()
+//     }
 
-    const salt = await bcrypt.genSalt(10)
-    this.message = await bcrypt.hash(this.message, salt)
-})
+//     const salt = await bcrypt.genSalt(10)
+//     this.message = await bcrypt.hash(this.message, salt)
+// })
 
 const Message = mongoose.model('Message', messageSchema);
 
